@@ -1,0 +1,22 @@
+/**
+ * Box Sizing Mixin
+ *
+ * @mixin
+ *  @param $type
+ *      $type can be defined as box-sizing
+ *  @example
+ *      @include box-sizing;
+ *      @include box-sizing(content-box);
+ */
+/**
+ * Generate Padding Using $values...
+ *
+ * @mixin
+ *  @param $values
+ *      Pass in the values used to add padding to an element
+ *  @example 
+ *       @include padding(2px 4px 6px);
+ * 
+ *
+ *
+ */
