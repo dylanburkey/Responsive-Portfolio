@@ -18,5 +18,44 @@
  *       @include padding(2px 4px 6px);
  * 
  *
+ */
+/**
+ * Container Styles
+ *
+ * @mixin
+ *  @param $width
+ *      Define the width of your conainer
+ *  @param $height
+ *      Define the height of your container
+ *  @param $background
+ *      Define the background of your container
+ *  @example
+ *      @Include box(120px,120px,fuscia)
  *
  */
+/*============================================================================*
+    B. Mixins
+
+    Basic Mixins to make life easier
+
+    @date: Tuesday May 1, 2018 -11:07 PM
+    @author: Dylan Burkey
+
+
+\*============================================================================*/
+/**
+ *  Media Query Mixin
+ *
+ *  @date: Tuesday May 1, 2018 - 11:12 PM
+ *  @author: Dyan Burkey
+ *
+ */
+.top {
+  color: blue;
+}
+
+@media only screen and (min-width: 1024px) {
+  .top {
+    color: red;
+  }
+}

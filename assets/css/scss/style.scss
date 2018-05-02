@@ -23,20 +23,14 @@
  *       @include padding(2px 4px 6px);
  * 
  *
- ∂'
+ */
 
  
- */
- @mixin padding($values..                                                                                                 .) {    
-    @each $var in $values {
-        padding: #{$var};
-    }
-}
 
-@include padding(20px, 20ox, 30px);
+
 
 /**
- * Container StylesA
+ * Container Styles
  *
  * @mixin
  *  @param $width
@@ -49,4 +43,65 @@
  *      @Include box(120px,120px,fuscia)
  *
  */
+
+
  
+ 
+ /// Base Font Size
+$base-font-size: 16px;
+
+ /// Base Line Height
+$base-line-height: 24px;
+
+/// Breakpoints
+$breakpoints: (
+    "phone":        400px,
+    "phone-wide":   480px,
+    "phablet":      560px,
+    "tablet-small": 640px,
+    "tablet":       768px,
+    "tablet-wide":  1024px,
+    "desktop":      1248px,
+    "desktop-wide": 1440px
+);
+ 
+
+/*============================================================================*\
+
+    B. Mixins
+
+    Basic Mixins to make life easier
+
+    @date: Tuesday May 1, 2018 -11:07 PM
+    @author: Dylan Burkey
+
+
+\*============================================================================*/
+
+
+/**
+ *  Media Query Mixin
+ *
+ *  @date: Tuesday May 1, 2018 - 11:12 PM
+ *  @author: Dyan Burkey
+ *
+ */ 
+
+@mixin mq($width, $type: min) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+        @if $type == max {
+            $width: $width - 1px;
+        }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
+
+.top {
+    color: blue;
+    @include mq('tablet-wide') {
+       color: red;
+    }
+}
