@@ -1,4 +1,3 @@
-
 /*============================================================================*\
 
   Responsive-Portfolio Styles
@@ -17,6 +16,54 @@
 
 \*============================================================================*/
 
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
 
 
@@ -30,26 +77,26 @@ $c-base-white: #fff;
 $c-footer: #666;
 $c-border: #ddd;
 
-
 /// Base Heading Font Family
-$base-heading-font-family: 'Georgia', Times, Times New Roman, serif;
+$base-heading-font-family: "Georgia", Times, Times New Roman, serif;
 
 /// Base Font Family
-$base-font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
- 
- /// Base Font Size
+$base-font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+
+/// Base Font Size
 $base-font-size: 16px;
 
- /// Base Line Height
+/// Base Line Height
 $base-line-height: 24px;
+
+$base-font-weight: 400;
 
 /// Breakpoints
 $breakpoints: (
-    "sm":           640px,
-    "md":           768px,
-    "lg":           980px
+	"sm": 640px,
+	"md": 768px,
+	"lg": 980px
 );
- 
 
 /*============================================================================*\
 
@@ -63,25 +110,24 @@ $breakpoints: (
 
 \*============================================================================*/
 
-
 /**
  *  Media Query Mixin
  *
  *  @date: Tuesday May 1, 2018 - 11:12 PM
  *  @author: Dyan Burkey
  *
- */ 
+ */
 
 @mixin mq($width, $type: min) {
-    @if map_has_key($breakpoints, $width) {
-        $width: map_get($breakpoints, $width);
-        @if $type == max {
-            $width: $width - 1px;
-        }
-        @media only screen and (#{$type}-width: $width) {
-            @content;
-        }
-    }
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+		@if $type == max {
+			$width: $width - 1px;
+		}
+		@media only screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
 }
 
 /**
@@ -92,14 +138,15 @@ $breakpoints: (
  *  @date: Tuesday May 1, 2018 - 11:19 PM
  *  @author: Dyan Burkey
  *
- */ 
+ */
 
-@mixin font-size($font-size, $line-height:true){
-    font-size:$font-size;
-    font-size:($font-size / $base-font-size)*1rem;
-    @if $line-height == true{
-        line-height:ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
-    }
+@mixin font-size($font-size, $line-height:true) {
+	font-size: $font-size;
+	font-size: ($font-size / $base-font-size)*1rem;
+	@if $line-height == true {
+		line-height: ceil($font-size / $base-line-height) * ($base-line-height /
+					$font-size);
+	}
 }
 
 /**
@@ -108,13 +155,13 @@ $breakpoints: (
  *  @date: Tuesday May 1, 2018 - 11:22 PM
  *  @author: Dyan Burkey
  *
- */ 
+ */
 
- @mixin opacity($opacity) {
-    opacity: $opacity;
-    $opacity-ie: $opacity * 100;
-    filter: alpha(opacity=$opacity-ie); //IE8
-  }
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); //IE8
+}
 
 /**
  *  Antialias font-smoothing Mixin
@@ -122,12 +169,20 @@ $breakpoints: (
  *  @date: Wednesday May 2, 2018 - 1:30 PM
  *  @author: Dyan Burkey
  *
- */ 
+ */
 
- @mixin antialias {
+@mixin antialias {
 	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin clearfix {
+	&::after {
+		content: " ";
+		clear: both;
+		display: block;
+	}
 }
 
 /**
@@ -141,10 +196,9 @@ $breakpoints: (
  *      @include box-sizing(content-box);
  */
 
- @mixin box-sizing($type: border-box){
-    box-sizing: $type;
+@mixin box-sizing($type: border-box) {
+	box-sizing: $type;
 }
-
 
 /**
  *  font-size adjustments mixin
@@ -152,21 +206,55 @@ $breakpoints: (
  *  @date: Wednesday May 2, 2018 - 6:54 PM
  *  @author: Dyan Burkey
  *
- */ 
+ */
 
- @mixin fluid(){
-    clear: both;
+@mixin fluid() {
+	clear: both;
 	margin-left: 0;
 	width: 100%;
 	float: left;
 	display: block;
- }
+}
+
+/*
+  Create Micro Grid Styles
+ */
+
+.wrapper,
+.row {
+  @include clearfix;
+	margin: 1em auto;
+}
+
+[class*='col-'] {
+  float: left;
+  padding: 1em;
+  width: 100%;
+  min-height: 1px;
+}
+@mixin create-grid($grid-columns: 12) {
+  @for $i from 1 through $grid-columns {
+
+	.col-#{$i} {
+	  width : 100% / $grid-columns * $i;
+	}
+
+  }
+}
+@include create-grid;
 
 
 
 
- 
+%headers {
+	font-family: $base-heading-font-family;
+	text-transform: capitalize;
+	color: $c-heading;
+}
 
+%caps {
+	text-transform: capitalize;
+}
 
 /*============================================================================*\
 
@@ -178,69 +266,192 @@ $breakpoints: (
 
 \*============================================================================*/
 
-
 * {
-    @include box-sizing;
+	@include box-sizing;
 }
 
 *::before,
 *::after {
-    @include box-sizing(inherit);
+	@include box-sizing;
 }
 
+img {
+    max-width: 100%;
+    width: 100%;
+}
+
+html {
+	height: 100%;
+	font-size: 100%;
+	overflow-y: scroll;
+}
 
 body {
-    font-family: $base-font-family;
-    font-size: 1em;
-    line-height: 1.6;
-    font-weight: $base-font-weight;
-    
-
+	font-family: $base-font-family;
+	font-size: 100%;
+	line-height: 1.6;
+	font-weight: $base-font-weight;
+	@include clearfix;
+	background: #999;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+	@extend %headers;
+}
+
+.alpha {
+	@include font-size(32px);
+	font-family: $base-heading-font-family;
+	font-weight: 800;
+}
+
+.beta {
+	@include font-size(28px, false);
+	font-weight: 600;
+}
+
+a {
+	text-decoration: none;
+}
+
+/// .site-header
+.site-header {
+	background: $c-base-white;
+	@include clearfix;
+}
+
+/// .site-logo-container
+
+.site-logo-container {
+	background: $c-heading;
+	padding-left: 2%;
+	padding: 0.75em 0;
+}
+
+/// .primary-site-link
+
+.primary-site-link {
+	color: $c-base-white;
+	text-align: center;
+	display: block;
+}
+
+.intro-header {
+	@include clearfix;
+	border-bottom: thin solid $c-font-color;
+	
+	.beta {
+		margin: 0.75em 0;
+	}
+}
+
+
+
+/// Navigation
+.nav-container {
+	line-height: 50px;
+	text-align: center;
+	@include clearfix;
+	li {
+		display: inline;
+		border-right: thin solid #ddd;
+		&:last-child {
+			border-right: none;
+		}
+	}
+}
+
+.nav-link {
+	@include font-size(16px, false);
+	color: $c-font-color;
+	margin: 0 2%;
+	padding: 0 10px;
+
+	@extend %caps;
+	font-weight: 400;
+	display: inline-block;
+	&:hover {
+		background: $c-heading;
+		color: $c-base-white;
+	}
+}
+
+
+
+.app-container__wrap {
+	@include clearfix;
+}
+
+.reponsive-img {
+	max-width: 100%;
+	width: 100%;
+}
+
+.content-container {
+	@include clearfix;
+	background: $c-base-white;
+	padding:2%;
+	width: 90%;
+	margin: 3em auto;
+}
 
 .app-container {
-    margin-left: auto;
-    margin-right: auto;
-	width: 93.1%;
-	padding-left: 2.45%;
-	padding-right: 2.45%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 640px;
+	///width: 93.1%;
+	///padding-left: 2.45%;
+	///padding-right: 2.45%;
 	clear: none;
-    float: none;
+	float: none;
 }
-
 
 /* 
  Tablet Styles
 */
 
-@include mq(md){
-    .app-container {
-        width: 90.675%;
-	    padding-left: 1.1625%;
-	    padding-right: 1.1625%;
-	    clear: none;
-	    float: none;
-	    margin-left: auto;
-    }
+@include mq(md) {
+	.app-container {
+		width: 90.675%;
+		max-width: 768px;
+		padding-left: 1.1625%;
+		padding-right: 1.1625%;
+		clear: none;
+		float: none;
+		margin-left: auto;
+	}
 }
 
 /*
     Desktop Styles
 */
 
-@include mq(lg){
-    .app-container{
-        width: 88.5%;
-        max-width: 980px;
-        padding-left: 0.75%;
-        padding-right: 0.75%;
-        margin: auto;
-        clear: none;
-        float: none;
-        margin-left: auto;
+@include mq(lg) {
+	.app-container {
+		max-width: 980px;
+		margin: auto;
+		clear: none;
+		float: none;
+		margin-left: auto;
+    }
+    
+    .app-container__wrap {
+        max-width: 960px;
+        @include clearfix;
+    }
+
+    .site-logo-container {
+        width: 30%;
+        float: left;
+    }
+
+    .nav-container {
+        width: 70%;
+        float: right;
+        text-align: right;
     }
 }
-
-
-
