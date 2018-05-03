@@ -1,38 +1,15 @@
-/**
- * Box Sizing Mixin
- *
- * @mixin
- *  @param $type
- *      $type can be defined as box-sizing
- *  @example
- *      @include box-sizing;
- *      @include box-sizing(content-box);
- */
-/**
- * Generate Padding Using $values...
- *
- * @mixin
- *  @param $values
- *      Pass in the values used to add padding to an element
- *  @example 
- *       @include padding(2px 4px 6px);
- * 
- *
- */
-/**
- * Container Styles
- *
- * @mixin
- *  @param $width
- *      Define the width of your conainer
- *  @param $height
- *      Define the height of your container
- *  @param $background
- *      Define the background of your container
- *  @example
- *      @Include box(120px,120px,fuscia)
- *
- */
+/*============================================================================*
+  Responsive-Portfolio Styles
+
+  TOC
+    1. Color Pallate
+    2. Base Fonts
+
+  @date: Wednesday May 2, 2018 -6:38 PM
+  @author: Dylan Burkey
+
+
+\*============================================================================*/
 /*============================================================================*
     B. Mixins
 
@@ -50,12 +27,86 @@
  *  @author: Dyan Burkey
  *
  */
-.top {
-  color: blue;
+/**
+ *  Font Size Mixin
+ *  Returns font-size in REM with pixel fallback
+ *  calculates the correct line-height for typography
+ *
+ *  @date: Tuesday May 1, 2018 - 11:19 PM
+ *  @author: Dyan Burkey
+ *
+ */
+/**
+ *  Opacity Mixin
+ *
+ *  @date: Tuesday May 1, 2018 - 11:22 PM
+ *  @author: Dyan Burkey
+ *
+ */
+/**
+ *  Antialias font-smoothing Mixin
+ *
+ *  @date: Wednesday May 2, 2018 - 1:30 PM
+ *  @author: Dyan Burkey
+ *
+ */
+/**
+ * Box Sizing Mixin
+ *
+ * @mixin
+ *  @param $type
+ *      $type can be defined as box-sizing
+ *  @example
+ *      @include box-sizing;
+ *      @include box-sizing(content-box);
+ */
+/**
+ *  font-size adjustments mixin
+ *
+ *  @date: Wednesday May 2, 2018 - 6:54 PM
+ *  @author: Dyan Burkey
+ *
+ */
+/*============================================================================*
+  Global Styles
+
+  @date: Wednesday May 2, 2018 -6:48 PM
+  @author: Dylan Burkey
+
+
+\*============================================================================*/
+* {
+  box-sizing: border-box;
 }
 
-@media only screen and (min-width: 1024px) {
-  .top {
-    color: red;
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/*
+    Mobile styles
+*/
+.app-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 93.1%;
+  padding-left: 2.45%;
+  padding-right: 2.45%;
+  clear: none;
+  float: none;
+}
+
+/* 
+ Tablet Styles
+*/
+@media only screen and (min-width: 768px) {
+  .app-container {
+    width: 90.675%;
+    padding-left: 1.1625%;
+    padding-right: 1.1625%;
+    clear: none;
+    float: none;
+    margin-left: auto;
   }
 }

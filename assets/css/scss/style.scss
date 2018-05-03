@@ -1,51 +1,41 @@
-/**
- * Box Sizing Mixin
- *
- * @mixin
- *  @param $type
- *      $type can be defined as box-sizing
- *  @example
- *      @include box-sizing;
- *      @include box-sizing(content-box);
- */
 
- @mixin box-sizing($type: border-box){
-     box-sizing: $type;
- }
+/*============================================================================*\
 
- /**
- * Generate Padding Using $values...
- *
- * @mixin
- *  @param $values
- *      Pass in the values used to add padding to an element
- *  @example 
- *       @include padding(2px 4px 6px);
- * 
- *
- */
+  Responsive-Portfolio Styles
 
- 
+  TOC
+  
+    1. Color Pallate
+    2. Base Fonts
+
+    Vendor: reset.css
+    Credits: 
+
+  @date: Wednesday May 2, 2018 -6:38 PM
+  @author: Dylan Burkey
+
+
+\*============================================================================*/
 
 
 
-/**
- * Container Styles
- *
- * @mixin
- *  @param $width
- *      Define the width of your conainer
- *  @param $height
- *      Define the height of your container
- *  @param $background
- *      Define the background of your container
- *  @example
- *      @Include box(120px,120px,fuscia)
- *
- */
+
+/// #1 Colors
+
+$c-heading: #4aaaa5;
+$c-heading-border: #ccc;
+$c-bg-tile: #4aaaa5;
+$c-font-color: #777;
+$c-base-white: #fff;
+$c-footer: #666;
+$c-border: #ddd;
 
 
- 
+/// Base Heading Font Family
+$base-heading-font-family: 'Georgia', Times, Times New Roman, serif;
+
+/// Base Font Family
+$base-font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
  
  /// Base Font Size
 $base-font-size: 16px;
@@ -55,14 +45,9 @@ $base-line-height: 24px;
 
 /// Breakpoints
 $breakpoints: (
-    "phone":        400px,
-    "phone-wide":   480px,
-    "phablet":      560px,
-    "tablet-small": 640px,
-    "tablet":       768px,
-    "tablet-wide":  1024px,
-    "desktop":      1248px,
-    "desktop-wide": 1440px
+    "sm":           640px,
+    "md":           768px,
+    "lg":           980px
 );
  
 
@@ -99,9 +84,163 @@ $breakpoints: (
     }
 }
 
-.top {
-    color: blue;
-    @include mq('tablet-wide') {
-       color: red;
+/**
+ *  Font Size Mixin
+ *  Returns font-size in REM with pixel fallback
+ *  calculates the correct line-height for typography
+ *
+ *  @date: Tuesday May 1, 2018 - 11:19 PM
+ *  @author: Dyan Burkey
+ *
+ */ 
+
+@mixin font-size($font-size, $line-height:true){
+    font-size:$font-size;
+    font-size:($font-size / $base-font-size)*1rem;
+    @if $line-height == true{
+        line-height:ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
     }
 }
+
+/**
+ *  Opacity Mixin
+ *
+ *  @date: Tuesday May 1, 2018 - 11:22 PM
+ *  @author: Dyan Burkey
+ *
+ */ 
+
+ @mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+  }
+
+/**
+ *  Antialias font-smoothing Mixin
+ *
+ *  @date: Wednesday May 2, 2018 - 1:30 PM
+ *  @author: Dyan Burkey
+ *
+ */ 
+
+ @mixin antialias {
+	font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Box Sizing Mixin
+ *
+ * @mixin
+ *  @param $type
+ *      $type can be defined as box-sizing
+ *  @example
+ *      @include box-sizing;
+ *      @include box-sizing(content-box);
+ */
+
+ @mixin box-sizing($type: border-box){
+    box-sizing: $type;
+}
+
+
+/**
+ *  font-size adjustments mixin
+ *
+ *  @date: Wednesday May 2, 2018 - 6:54 PM
+ *  @author: Dyan Burkey
+ *
+ */ 
+
+ @mixin fluid(){
+    clear: both;
+	margin-left: 0;
+	width: 100%;
+	float: left;
+	display: block;
+ }
+
+
+
+
+ 
+
+
+/*============================================================================*\
+
+  Global Styles
+
+  @date: Wednesday May 2, 2018 -6:48 PM
+  @author: Dylan Burkey
+
+
+\*============================================================================*/
+
+
+* {
+    @include box-sizing;
+}
+
+*::before,
+*::after {
+    @include box-sizing(inherit);
+}
+
+
+body {
+    font-family: $base-font-family;
+    font-size: 1em;
+    line-height: 1.6;
+    font-weight: $base-font-weight;
+    
+
+}
+
+
+.app-container {
+    margin-left: auto;
+    margin-right: auto;
+	width: 93.1%;
+	padding-left: 2.45%;
+	padding-right: 2.45%;
+	clear: none;
+    float: none;
+}
+
+
+/* 
+ Tablet Styles
+*/
+
+@include mq(md){
+    .app-container {
+        width: 90.675%;
+	    padding-left: 1.1625%;
+	    padding-right: 1.1625%;
+	    clear: none;
+	    float: none;
+	    margin-left: auto;
+    }
+}
+
+/*
+    Desktop Styles
+*/
+
+@include mq(lg){
+    .app-container{
+        width: 88.5%;
+        max-width: 980px;
+        padding-left: 0.75%;
+        padding-right: 0.75%;
+        margin: auto;
+        clear: none;
+        float: none;
+        margin-left: auto;
+    }
+}
+
+
+
